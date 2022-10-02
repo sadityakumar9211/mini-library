@@ -1,9 +1,9 @@
-//fetching the book data at the build time
+//fetching the magazine data at the build time
 import Papa from "papaparse";
 import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 
-export default function books() {
+export default function magazines() {
   const commonConfig = { delimiter: ";" };
   const [isLoading, setIsLoading] = useState(true);
   const [CSVData, setCSVData] = useState();
@@ -11,9 +11,11 @@ export default function books() {
   const [searchText, setSearchText] = useState("");
   const [textType, setTextType] = useState("");
 
+  const [authorName, setAuthorName] = useState("");
+
   function parseCSVData() {
     Papa.parse(
-      "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/books.csv",
+      "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/magazines.csv",
       {
         ...commonConfig,
         header: true,
@@ -71,7 +73,7 @@ export default function books() {
                 <th>Title</th>
                 <th>ISBN</th>
                 <th>Authors</th>
-                <th>Description</th>
+                <th>Published on</th>
               </tr>
             </thead>
             <tbody>
@@ -94,10 +96,10 @@ export default function books() {
                   return data.isbn ? (
                     <tr>
                       <th>{index}</th>
-                      <td>{data.title.substring(0,25)+"..."}</td>
+                      <td>{data.title}</td>
                       <td>{data.isbn}</td>
-                      <td >{data.authors.replace(/,/g, ', ')}</td>
-                      <td>{data.description.substring(0,50)+"..."}</td>
+                      <td>{data.authors.replace(/,/g, ", ")}</td>
+                      <td>{data.publishedAt}</td>
                     </tr>
                   ) : null;
                 })}

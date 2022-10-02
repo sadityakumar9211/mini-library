@@ -11,6 +11,8 @@ export default function books() {
   const [searchText, setSearchText] = useState("");
   const [textType, setTextType] = useState("");
 
+
+
   function parseCSVData() {
     Papa.parse(
       "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/books.csv",
@@ -25,6 +27,7 @@ export default function books() {
       }
     );
   }
+
 
   function compare_to_sort(x, y) {
     if (x.title < y.title) return -1;
@@ -75,7 +78,7 @@ export default function books() {
               </tr>
             </thead>
             <tbody>
-              {CSVData.filter((data) => {
+              {CSVData && CSVData.filter((data) => {
                 if (textType === "" || searchText.trim() == "") {
                   return data;
                 } else if (textType === "isbn") {
@@ -94,10 +97,10 @@ export default function books() {
                   return data.isbn ? (
                     <tr>
                       <th>{index}</th>
-                      <td>{data.title.substring(0,25)+"..."}</td>
+                      <td>{data.title.substring(0,30)+"..."}</td>
                       <td>{data.isbn}</td>
                       <td >{data.authors.replace(/,/g, ', ')}</td>
-                      <td>{data.description.substring(0,50)+"..."}</td>
+                      <td>{data.description.substring(0,60)+"..."}</td>
                     </tr>
                   ) : null;
                 })}

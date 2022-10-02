@@ -11,6 +11,9 @@ export default function Header() {
                 <Link href="/magazine">
                     <a className="mr-4 p-6">Magazine</a>
                 </Link>
+                <Link href="/author">
+                    <a className="mr-4 p-6">Author</a>
+                </Link>
             </div>
         </nav>
     )
