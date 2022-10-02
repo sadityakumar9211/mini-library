@@ -35,7 +35,6 @@ export default function books() {
     parseCSVData();
   }, []);
 
-
   return isLoading ? (
     <Loading />
   ) : (
@@ -47,9 +46,7 @@ export default function books() {
         }}
         value={textType}
       >
-        <option selected>
-          Search by
-        </option>
+        <option selected>Search by</option>
 
         <option value="isbn">ISBN</option>
 
@@ -66,32 +63,46 @@ export default function books() {
         disabled={textType === "email" || textType === "isbn" ? false : true}
       />
       {
-        
-        <div className="grid grid-cols-3 gap-4">
-          {CSVData.filter((data) => {
-            if (textType === "" || searchText.trim() == "") {
-              return data;
-            } else if (textType === "isbn") {
-              return data.isbn && data.isbn.includes(searchText.toLowerCase());
-            } else if (textType === "email") {
-              return (
-                data.authors && data.authors.includes(searchText.toLowerCase())
-              );
-            }
-          }).sort(compare_to_sort).map((data) => {
-            return data.isbn ? (
-              <div className="card" key={data.isbn}>
-                <div className="card-body">
-                  <h2 className="card-title underline">{data.title}</h2>
-                  <h3 className="card-subtitle">ISBN: {data.isbn}</h3>
-                  <h3 className="card-subtitle badge badge-lg py-5">
-                    {data.authors}
-                  </h3>
-                  <p className="card-text">{data.description}</p>
-                </div>
-              </div>
-            ) : null;
-          })}
+        <div className="overflow-x-auto">
+          <table className="table w-full">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>ISBN</th>
+                <th>Authors</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CSVData.filter((data) => {
+                if (textType === "" || searchText.trim() == "") {
+                  return data;
+                } else if (textType === "isbn") {
+                  return (
+                    data.isbn && data.isbn.includes(searchText.toLowerCase())
+                  );
+                } else if (textType === "email") {
+                  return (
+                    data.authors &&
+                    data.authors.includes(searchText.toLowerCase())
+                  );
+                }
+              })
+                .sort(compare_to_sort)
+                .map((data, index) => {
+                  return data.isbn ? (
+                    <tr>
+                      <th>{index}</th>
+                      <td>{data.title.substring(0,25)+"..."}</td>
+                      <td>{data.isbn}</td>
+                      <td >{data.authors.replace(/,/g, ', ')}</td>
+                      <td>{data.description.substring(0,50)+"..."}</td>
+                    </tr>
+                  ) : null;
+                })}
+            </tbody>
+          </table>
         </div>
       }
     </div>
