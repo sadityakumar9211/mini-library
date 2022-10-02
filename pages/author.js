@@ -8,24 +8,6 @@ export default function Authors() {
   const [isLoading, setIsLoading] = useState(true);
   const [CSVData, setCSVData] = useState();
 
-  const [searchText, setSearchText] = useState("");
-  const [textType, setTextType] = useState("");
-
-  function parseCSVData() {
-    Papa.parse(
-      "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/authors.csv",
-      {
-        ...commonConfig,
-        header: true,
-        download: true,
-        complete: (result) => {
-          setCSVData(result.data);
-          setIsLoading(false);
-        },
-      }
-    );
-  }
-
 
   function compare_to_sort(x, y) {
     if (x.email < y.email) return -1;
@@ -33,7 +15,18 @@ export default function Authors() {
     return 0;
   }
   useEffect(() => {
-    parseCSVData();
+    Papa.parse(
+        "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/authors.csv",
+        {
+          ...commonConfig,
+          header: true,
+          download: true,
+          complete: (result) => {
+            setCSVData(result.data);
+            setIsLoading(false);
+          },
+        }
+      );
   }, []);
 
   return isLoading ? (

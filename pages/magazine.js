@@ -11,22 +11,6 @@ export default function Magazines() {
   const [searchText, setSearchText] = useState("");
   const [textType, setTextType] = useState("");
 
-  const [authorName, setAuthorName] = useState("");
-
-  function parseCSVData() {
-    Papa.parse(
-      "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/magazines.csv",
-      {
-        ...commonConfig,
-        header: true,
-        download: true,
-        complete: (result) => {
-          setCSVData(result.data);
-          setIsLoading(false);
-        },
-      }
-    );
-  }
 
   function compare_to_sort(x, y) {
     if (x.title < y.title) return -1;
@@ -34,7 +18,18 @@ export default function Magazines() {
     return 0;
   }
   useEffect(() => {
-    parseCSVData();
+    Papa.parse(
+        "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/magazines.csv",
+        {
+          ...commonConfig,
+          header: true,
+          download: true,
+          complete: (result) => {
+            setCSVData(result.data);
+            setIsLoading(false);
+          },
+        }
+      );
   }, []);
 
   return isLoading ? (

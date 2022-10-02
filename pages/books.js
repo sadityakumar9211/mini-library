@@ -12,30 +12,24 @@ export default function Books() {
   const [textType, setTextType] = useState("");
 
 
-
-  function parseCSVData() {
-    Papa.parse(
-      "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/books.csv",
-      {
-        ...commonConfig,
-        header: true,
-        download: true,
-        complete: (result) => {
-          setCSVData(result.data);
-          setIsLoading(false);
-        },
-      }
-    );
-  }
-
-
   function compare_to_sort(x, y) {
     if (x.title < y.title) return -1;
     if (x.title > y.title) return 1;
     return 0;
   }
   useEffect(() => {
-    parseCSVData();
+    Papa.parse(
+        "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/books.csv",
+        {
+          ...commonConfig,
+          header: true,
+          download: true,
+          complete: (result) => {
+            setCSVData(result.data);
+            setIsLoading(false);
+          },
+        }
+      );
   }, []);
 
   return isLoading ? (
