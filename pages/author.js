@@ -3,15 +3,13 @@ import Papa from "papaparse";
 import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 
-export default function authors() {
+export default function Authors() {
   const commonConfig = { delimiter: ";" };
   const [isLoading, setIsLoading] = useState(true);
   const [CSVData, setCSVData] = useState();
 
   const [searchText, setSearchText] = useState("");
   const [textType, setTextType] = useState("");
-
-
 
   function parseCSVData() {
     Papa.parse(

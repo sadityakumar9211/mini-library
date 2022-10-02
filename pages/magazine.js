@@ -3,7 +3,7 @@ import Papa from "papaparse";
 import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 
-export default function magazines() {
+export default function Magazines() {
   const commonConfig = { delimiter: ";" };
   const [isLoading, setIsLoading] = useState(true);
   const [CSVData, setCSVData] = useState();
