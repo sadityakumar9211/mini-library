@@ -37,7 +37,7 @@ export default function Authors() {
           <table className="table w-full">
             <thead>
               <tr>
-                <th></th>
+                <th style={{ width: "3rem" }}></th>
                 <th>Email</th>
                 <th>Name</th>
               </tr>
@@ -47,7 +47,7 @@ export default function Authors() {
                 CSVData.map((data, index) => {
                   return data.email ? (
                     <tr>
-                      <th>{index + 1}</th>
+                      <th style={{ width: "3rem" }}>{index + 1}</th>
                       <td>{data.email}</td>
                       <td>{data.firstname + " " + data.lastname}</td>
                     </tr>
