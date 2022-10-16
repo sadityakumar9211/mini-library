@@ -8,7 +8,6 @@ export default function Authors() {
   const [isLoading, setIsLoading] = useState(true);
   const [CSVData, setCSVData] = useState();
 
-
   function compare_to_sort(x, y) {
     if (x.email < y.email) return -1;
     if (x.email > y.email) return 1;
@@ -16,17 +15,17 @@ export default function Authors() {
   }
   useEffect(() => {
     Papa.parse(
-        "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/authors.csv",
-        {
-          ...commonConfig,
-          header: true,
-          download: true,
-          complete: (result) => {
-            setCSVData(result.data);
-            setIsLoading(false);
-          },
-        }
-      );
+      "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/authors.csv",
+      {
+        ...commonConfig,
+        header: true,
+        download: true,
+        complete: (result) => {
+          setCSVData(result.data);
+          setIsLoading(false);
+        },
+      }
+    );
   }, []);
 
   return isLoading ? (
@@ -44,10 +43,11 @@ export default function Authors() {
               </tr>
             </thead>
             <tbody>
-              {CSVData && CSVData.map((data, index) => {
+              {CSVData &&
+                CSVData.map((data, index) => {
                   return data.email ? (
                     <tr>
-                      <th>{index+1}</th>
+                      <th>{index + 1}</th>
                       <td>{data.email}</td>
                       <td>{data.firstname + " " + data.lastname}</td>
                     </tr>
