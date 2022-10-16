@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
-    <div className="flex flex-col justify-center pt-12 content-center">
+    <div className="flex flex-col justify-center pt-12 content-center h-screen">
       <h1 className={`text-lg font-bold text-center ${styles.title}`}>
         Welcome to Library
       </h1>
