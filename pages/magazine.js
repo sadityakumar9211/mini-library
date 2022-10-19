@@ -36,7 +36,7 @@ export default function Magazines() {
   ) : (
     <div>
       <select
-        className="select w-full max-w-xs"
+        className="select w-auto max-w-xs my-3 mb-2"
         onChange={(event) => {
           setTextType(event.target.value);
         }}
