@@ -31,32 +31,37 @@ export default function Authors() {
   return isLoading ? (
     <Loading />
   ) : (
-    <div>
-      {
-        <div className="overflow-x-auto">
-          <table className="table w-full">
-            <thead>
-              <tr>
-                <th style={{ width: "3rem" }}></th>
-                <th>Email</th>
-                <th>Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {CSVData &&
-                CSVData.map((data, index) => {
-                  return data.email ? (
-                    <tr>
-                      <th style={{ width: "3rem" }}>{index + 1}</th>
-                      <td>{data.email}</td>
-                      <td>{data.firstname + " " + data.lastname}</td>
-                    </tr>
-                  ) : null;
-                })}
-            </tbody>
-          </table>
-        </div>
-      }
-    </div>
+    <>
+      <h1 className="m-5 mx-4 text-3xl font-semibold tracking-tighter">
+        Authors
+      </h1>
+      <div>
+        {
+          <div className="overflow-x-auto">
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th style={{ width: "3rem" }}></th>
+                  <th>Email</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {CSVData &&
+                  CSVData.map((data, index) => {
+                    return data.email ? (
+                      <tr>
+                        <th style={{ width: "3rem" }}>{index + 1}</th>
+                        <td>{data.email}</td>
+                        <td>{data.firstname + " " + data.lastname}</td>
+                      </tr>
+                    ) : null;
+                  })}
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </>
   );
 }
