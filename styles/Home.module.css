@@ -117,6 +117,14 @@
   margin-left: 0.5rem;
 }
 
+.imageWrapper {
+  width: 100%;
+  height: fit-content;
+  max-width: 50rem;
+  margin: 3rem auto;
+  position: relative;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
