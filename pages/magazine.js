@@ -11,7 +11,6 @@ export default function Magazines() {
   const [searchText, setSearchText] = useState("");
   const [textType, setTextType] = useState("");
 
-
   function compare_to_sort(x, y) {
     if (x.title < y.title) return -1;
     if (x.title > y.title) return 1;
@@ -19,17 +18,17 @@ export default function Magazines() {
   }
   useEffect(() => {
     Papa.parse(
-        "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/magazines.csv",
-        {
-          ...commonConfig,
-          header: true,
-          download: true,
-          complete: (result) => {
-            setCSVData(result.data);
-            setIsLoading(false);
-          },
-        }
-      );
+      "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/magazines.csv",
+      {
+        ...commonConfig,
+        header: true,
+        download: true,
+        complete: (result) => {
+          setCSVData(result.data);
+          setIsLoading(false);
+        },
+      }
+    );
   }, []);
 
   return isLoading ? (

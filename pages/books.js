@@ -11,7 +11,6 @@ export default function Books() {
   const [searchText, setSearchText] = useState("");
   const [textType, setTextType] = useState("");
 
-
   function compare_to_sort(x, y) {
     if (x.title < y.title) return -1;
     if (x.title > y.title) return 1;
@@ -19,17 +18,17 @@ export default function Books() {
   }
   useEffect(() => {
     Papa.parse(
-        "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/books.csv",
-        {
-          ...commonConfig,
-          header: true,
-          download: true,
-          complete: (result) => {
-            setCSVData(result.data);
-            setIsLoading(false);
-          },
-        }
-      );
+      "https://raw.githubusercontent.com/echocat/nodejs-kata-1/master/data/books.csv",
+      {
+        ...commonConfig,
+        header: true,
+        download: true,
+        complete: (result) => {
+          setCSVData(result.data);
+          setIsLoading(false);
+        },
+      }
+    );
   }, []);
 
   return isLoading ? (
@@ -72,32 +71,33 @@ export default function Books() {
               </tr>
             </thead>
             <tbody>
-              {CSVData && CSVData.filter((data) => {
-                if (textType === "" || searchText.trim() == "") {
-                  return data;
-                } else if (textType === "isbn") {
-                  return (
-                    data.isbn && data.isbn.includes(searchText.toLowerCase())
-                  );
-                } else if (textType === "email") {
-                  return (
-                    data.authors &&
-                    data.authors.includes(searchText.toLowerCase())
-                  );
-                }
-              })
-                .sort(compare_to_sort)
-                .map((data, index) => {
-                  return data.isbn ? (
-                    <tr>
-                      <th>{index}</th>
-                      <td>{data.title.substring(0,30)+"..."}</td>
-                      <td>{data.isbn}</td>
-                      <td >{data.authors.replace(/,/g, ', ')}</td>
-                      <td>{data.description.substring(0,60)+"..."}</td>
-                    </tr>
-                  ) : null;
-                })}
+              {CSVData &&
+                CSVData.filter((data) => {
+                  if (textType === "" || searchText.trim() == "") {
+                    return data;
+                  } else if (textType === "isbn") {
+                    return (
+                      data.isbn && data.isbn.includes(searchText.toLowerCase())
+                    );
+                  } else if (textType === "email") {
+                    return (
+                      data.authors &&
+                      data.authors.includes(searchText.toLowerCase())
+                    );
+                  }
+                })
+                  .sort(compare_to_sort)
+                  .map((data, index) => {
+                    return data.isbn ? (
+                      <tr>
+                        <th>{index}</th>
+                        <td>{data.title.substring(0, 30) + "..."}</td>
+                        <td>{data.isbn}</td>
+                        <td>{data.authors.replace(/,/g, ", ")}</td>
+                        <td>{data.description.substring(0, 60) + "..."}</td>
+                      </tr>
+                    ) : null;
+                  })}
             </tbody>
           </table>
         </div>
